@@ -44,20 +44,22 @@ elif choice == "2":
 else:
     exit()
 
-# Send message method and recevive message methods used to encrypt and decrypt the
+# Send message method and receive message methods used to encrypt and decrypt the
 # sent messages
 
 
 def send_message(client_user):
     while True:
         message = input("")
-        client_user.send(rsa.encrypt(message.encode(), public_other))
-        print("You: " + message)
+        encrypted_message = rsa.encrypt(message.encode(), public_other)
+        print("Your Plain-Text Message: " + message)
+        print("Your Encrypted Message: " + encrypted_message.hex())
+        client_user.send(encrypted_message)
 
 
 def receive_message(client_user):
     while True:
-        print("Other: " + rsa.decrypt(client_user.recv(1024), private_key).decode())
+        print("Other (Decrypted message): " + rsa.decrypt(client_user.recv(1024), private_key).decode())
 
 
 # These threads allow us to send and receive messages concurrently using their own
