@@ -53,7 +53,9 @@ def send_message(client_user):
         message = input("")
         encrypted_message = rsa.encrypt(message.encode(), public_other)
         print("Your Plain-Text Message: " + message)
-        print("Your Encrypted Message: " + encrypted_message.hex())
+        # uncomment the line below this to show encrypted message in the output
+        # used to verify the message was encrypted
+        # print("Your Encrypted Message: " + encrypted_message.hex())
         client_user.send(encrypted_message)
 
 
